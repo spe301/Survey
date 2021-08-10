@@ -13,9 +13,9 @@ body {
 </head>
 <body>
 
-<h1>Hyros Leads Survey</h1>
-<p>Have you gone through the Hyros Sales process?</p>
-<p>If so, we'd appreciate if you filled out this survey</p>
+<h1 style="color: orange;">Hyros Leads Survey</h1>
+<p style="color: orange;">Have you gone through the Hyros Sales process?</p>
+<p style="color: orange;">If so, we'd appreciate if you filled out this survey</p>
 
         <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
         </div>
@@ -23,7 +23,7 @@ body {
     <form action="{{ url_for('name')}}"method="post">
     	<input type="text" name="name" placeholder="please do not use spaces" required="required" />
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
     </form>
    <br>
    <br>
@@ -34,7 +34,83 @@ body {
     <form action="{{ url_for('landingPage')}}"method="post">
     	<input type="text" name="landingPage" placeholder="landing page url" required="required" />
 
-        <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
     </form>
+    <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
+        </div>
+    <h2 style="color: blue;">What niche is your business in (ie. Fitness)?</h2>
+    <form action="{{ url_for('domain')}}"method="post">
+        <input type="text" name="domain" placeholder="enter your niche" required="required" />
+
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+   <br>
+   <br>
+    <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
+        </div>
+    <h2 style="color: blue;">How much do you spend on ads per month?</h2>
+
+    <form action="{{ url_for('adspend')}}"method="post">
+        <input type="text" name="adspend" placeholder="please use only numbers" required="required" />
+
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+    <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
+        </div>
+    <br>
+   <br>
+    <h2 style="color: blue;">What are your monthly hardcosts?</h2>
+    <h2 style="color: blue;">These exclude employees, rent, and adspend.</h2>
+    <form action="{{ url_for('hardcosts')}}"method="post">
+        <input type="text" name="hardcosts" placeholder="please use only numbers" required="required" />
+
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+   <br>
+   <br>
+   <h2 style="color: blue;">Have you purchased Hyros?</h2>
+<form id="form1" action="/customer" method="GET" enctype="multipart/form-data">
+<select id="mySelect" name = "customer">
+  <option value="yes">yes</option>
+  <option value="no">no</option>
+</select>
+</form>
+<br>
+<br>
+<h2 style="color: blue;">What do you sell?</h2>
+<form id="form1" action="/model" method="GET" enctype="multipart/form-data">
+<select id="mySelect" name = "model">
+  <option value="consulting">consulting</option>
+  <option value="info / coaching">info / coaching</option>
+  <option value="tangible products">tangible products</option>
+  <option value="software">software</option>
+  <option value="other">other</option>
+</select>
+</form>
+<br>
+<br>
+<h2 style="color: blue;">Have did you find out about Hyros?</h2>
+<form id="form1" action="/source" method="GET" enctype="multipart/form-data">
+<select id="mySelect" name = "source">
+  <option value="youtube">youtube</option>
+  <option value="facebook">facebook</option>
+  <option value="twitter">twitter</option>
+  <option value="word of mouth">word of mouth</option>
+  <option value="cold call">cold call</option>
+  <option value="other">other</option>
+</select>
+</form>
+<br>
+<br>
+
+    <h2 style="color: blue;">Enter your email to receive ... !</h2>
+
+    <form action="{{ url_for('email')}}"method="post">
+        <input type="text" name="email" placeholder="landing page url" required="required" />
+
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+    <br>
+   <br>
     </body>
 </html>

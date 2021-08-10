@@ -19,22 +19,55 @@ def name():
     name = request.form['name'].lower()
     cursor.execute('''INSERT INTO test (col1) VALUES ('{}');'''.format(name))
     connection.commit()
-    return name
+    return render_template('index2.html')
 
 @app.route('/landingPage', methods=['POST'])
 def landingPage():
     landingPage = request.form['landingPage']
-    cursor.execute('''UPDATE test SET col2='{}' WHERE col1 IS NULL;'''.format(landingPage)) #'''INSERT INTO test (col2) VALUES ('{}');'''.format(landingPage))
+    cursor.execute('''UPDATE test SET col2='{}' WHERE col2 IS NULL;'''.format(landingPage)) #this query structure will be continued throughout
     connection.commit()
-    return landingPage
+    return render_template('index2.html')
 
-'''@app.route('/predict', methods=['POST'])
-def predict():
-    name = get_name()
-    landingPage = get_landingPage()
-    cursor.execute('INSERT INTO test (col1, col2) VALUES ('{}', '{}');'.format(name, landingPage))
+@app.route('/domain', methods=['POST'])
+def domain():
+    domain = request.form['domain'].lower().replace(' ', '_')
+    return render_template('index2.html')
+
+@app.route('/adspend', methods=['POST'])
+def adspend():
+    adspend = int(request.form['adspend'].lower().replace(' ', '_'))
+    return render_template('index2.html')
+
+@app.route('/hardcosts', methods=['POST'])
+def hardcosts():
+    hardcosts = int(request.form['hardcosts'].lower().replace(' ', '_'))
+    return render_template('index2.html')
+
+@app.route('/customer', methods=['GET'])
+def customer():
+    customer = request.form.get('customer')
+    cursor.execute('''INSERT INTO test (testcol) VALUES ('{}');'''.format(customer))
     connection.commit()
-    return render_template('index.html')'''
+    return render_template('index2.html')
+
+@app.route('/model', methods=['GET'])
+def model():
+    model = request.form.get('model')
+    cursor.execute('''INSERT INTO test (testcol) VALUES ('{}');'''.format(model))
+    connection.commit()
+    return render_template('index2.html')
+
+@app.route('/source', methods=['GET'])
+def source():
+    source = request.form.get('source')
+    cursor.execute('''INSERT INTO test (testcol) VALUES ('{}');'''.format(source))
+    connection.commit()
+    return render_template('index2.html')
+
+@app.route('/email', methods=['POST'])
+def email():
+    email = request.form['email']
+    return render_template('index2.html')
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)
