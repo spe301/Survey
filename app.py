@@ -9,21 +9,24 @@ connection2 = connect(host='localhost', user='root', password='Raptor//Kona9', d
 cursor2 = connection2.cursor()
 
 app = Flask(__name__)
-#name, customer, domain = processUserInput(name, customer, domain)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index2.html')
 
-#try using another function with the same name
-@app.route('/store', methods=['POST'])
-def store():
+@app.route('/name', methods=['POST'])
+def name():
     name = request.form['name'].lower()
     cursor.execute('''INSERT INTO test (col1) VALUES ('{}');'''.format(name))
     connection.commit()
     return name
 
-
+@app.route('/landingPage', methods=['POST'])
+def landingPage():
+    landingPage = request.form['landingPage']
+    cursor.execute('''UPDATE test SET col2='{}' WHERE col1 IS NULL;'''.format(landingPage)) #'''INSERT INTO test (col2) VALUES ('{}');'''.format(landingPage))
+    connection.commit()
+    return landingPage
 
 '''@app.route('/predict', methods=['POST'])
 def predict():

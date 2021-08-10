@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sales Scientist</title>
+<style>
+body {
+  background-color: black;
+  text-align: center;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+
+<h1>Hyros Leads Survey</h1>
+<p>Have you gone through the Hyros Sales process?</p>
+<p>If so, we'd appreciate if you filled out this survey</p>
+
+        <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
+        </div>
+	<h2 style="color: blue;">What is the domain name of your business (ie. FrankKern.com)?</h2>
+    <form action="{{ url_for('name')}}"method="post">
+    	<input type="text" name="name" placeholder="please do not use spaces" required="required" />
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+   <br>
+   <br>
+  	<div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
+        </div>
+	<h2 style="color: blue;">Please provide the url to the landing page of your latest ad campaign</h2>
+
+    <form action="{{ url_for('landingPage')}}"method="post">
+    	<input type="text" name="landingPage" placeholder="landing page url" required="required" />
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+    </body>
+</html>
