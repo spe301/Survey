@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sales Scientist</title>
+<style>
+body {
+  background-color: black;
+  text-align: center;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+<body>
+
+    <h2 style="color: blue;">What are your monthly hardcosts?</h2>
+    <h2 style="color: blue;">These exclude employees, rent, and adspend.</h2>
+    <form action="{{ url_for('hardcosts')}}"method="post">
+        <input type="text" name="hardcosts" placeholder="please use only numbers" required="required" />
+
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+    {{ h_text }}
+   <br>
+   <br>
+   <h2 style="color: blue;">Have you purchased Hyros?</h2>
+<form id="form1" action="{{ url_for('customer')}}" method="post" enctype="multipart/form-data">
+<select id="mySelect" name = "customer">
+  <option value="yes">yes</option>
+  <option value="no">no</option>
+</select>
+<button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+</form>
+{{ c_text }}
+<br>
+<br>
+<h2 style="color: blue;">What do you sell?</h2>
+<form id="form1" action="/model" method="post" enctype="multipart/form-data">
+<select id="mySelect" name = "model">
+  <option value="consulting">consulting</option>
+  <option value="info / coaching">info / coaching</option>
+  <option value="tangible products">tangible products</option>
+  <option value="software">software</option>
+  <option value="other">other</option>
+</select>
+<button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+</form>
+{{ m_text }}
+<br>
+<br>
+<h2 style="color: blue;">Have did you find out about Hyros?</h2>
+<form id="form1" action="/source" method="post" enctype="multipart/form-data">
+<select id="mySelect" name = "source">
+  <option value="youtube">youtube</option>
+  <option value="facebook">facebook</option>
+  <option value="twitter">twitter</option>
+  <option value="word of mouth">word of mouth</option>
+  <option value="cold call">cold call</option>
+  <option value="other">other</option>
+</select>
+<button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+</form>
+{{ s_text }}
+<br>
+<br>
+
+    <h2 style="color: blue;">Enter your email to receive ... !</h2>
+
+    <form action="{{ url_for('email')}}"method="post">
+        <input type="text" name="email" placeholder="landing page url" required="required" />
+
+        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
+    </form>
+    <br>
+   <br>
+    </body>
+</html>

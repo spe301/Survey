@@ -25,6 +25,7 @@ body {
 
         <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
     </form>
+    {{ n_text }}
    <br>
    <br>
   	<div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
@@ -36,6 +37,7 @@ body {
 
         <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
     </form>
+    {{ lp_text }}
     <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
         </div>
     <h2 style="color: blue;">What niche is your business in (ie. Fitness)?</h2>
@@ -44,6 +46,7 @@ body {
 
         <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
     </form>
+    {{ d_text }}
    <br>
    <br>
     <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
@@ -55,61 +58,9 @@ body {
 
         <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
     </form>
+    {{ as_text }}
     <div style="margin-left:10%; margin-right:10%;",  outline-color: powderblue;>
         </div>
-    <br>
-   <br>
-    <h2 style="color: blue;">What are your monthly hardcosts?</h2>
-    <h2 style="color: blue;">These exclude employees, rent, and adspend.</h2>
-    <form action="{{ url_for('hardcosts')}}"method="post">
-        <input type="text" name="hardcosts" placeholder="please use only numbers" required="required" />
-
-        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-    </form>
-   <br>
-   <br>
-   <h2 style="color: blue;">Have you purchased Hyros?</h2>
-<form id="form1" action="/customer" method="GET" enctype="multipart/form-data">
-<select id="mySelect" name = "customer">
-  <option value="yes">yes</option>
-  <option value="no">no</option>
-</select>
-</form>
-<br>
-<br>
-<h2 style="color: blue;">What do you sell?</h2>
-<form id="form1" action="/model" method="GET" enctype="multipart/form-data">
-<select id="mySelect" name = "model">
-  <option value="consulting">consulting</option>
-  <option value="info / coaching">info / coaching</option>
-  <option value="tangible products">tangible products</option>
-  <option value="software">software</option>
-  <option value="other">other</option>
-</select>
-</form>
-<br>
-<br>
-<h2 style="color: blue;">Have did you find out about Hyros?</h2>
-<form id="form1" action="/source" method="GET" enctype="multipart/form-data">
-<select id="mySelect" name = "source">
-  <option value="youtube">youtube</option>
-  <option value="facebook">facebook</option>
-  <option value="twitter">twitter</option>
-  <option value="word of mouth">word of mouth</option>
-  <option value="cold call">cold call</option>
-  <option value="other">other</option>
-</select>
-</form>
-<br>
-<br>
-
-    <h2 style="color: blue;">Enter your email to receive ... !</h2>
-
-    <form action="{{ url_for('email')}}"method="post">
-        <input type="text" name="email" placeholder="landing page url" required="required" />
-
-        <button style="color: orange;" type="submit" class="btn btn-primary btn-block btn-large">Submit</button>
-    </form>
     <br>
    <br>
     </body>

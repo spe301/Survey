@@ -5,7 +5,7 @@ from mysql.connector import connect
 
 connection = connect(host='localhost', user='root', password='Raptor//Kona9', database='leads')
 cursor = connection.cursor()
-connection2 = connect(host='localhost', user='root', password='Raptor//Kona9', database='fox_data_consulting')
+connection2 = connect(host='localhost', user='root', password='Raptor//Kona9', database='fox_data_consulting') #this one will be used to store the email addresses
 cursor2 = connection2.cursor()
 
 app = Flask(__name__)
@@ -17,57 +17,78 @@ def home():
 @app.route('/name', methods=['POST'])
 def name():
     name = request.form['name'].lower()
-    cursor.execute('''INSERT INTO test (col1) VALUES ('{}');'''.format(name))
+    #may need try except loop for repeating values
+    cursor.execute('''INSERT INTO survey (name) VALUES ('{}');'''.format(name)) #will also be written to connection2
     connection.commit()
-    return render_template('index2.html')
+    cursor2.execute('''INSERT INTO leads (name) VALUES ('{}');'''.format(request.form['name'])) #will also be written to connection2
+    connection2.commit()
+    return render_template('index2.html', n_text=request.form['name'])
 
 @app.route('/landingPage', methods=['POST'])
 def landingPage():
     landingPage = request.form['landingPage']
-    cursor.execute('''UPDATE test SET col2='{}' WHERE col2 IS NULL;'''.format(landingPage)) #this query structure will be continued throughout
+    cursor.execute('''UPDATE survey SET landingPage='{}' WHERE landingPage IS NULL;'''.format(landingPage))
     connection.commit()
-    return render_template('index2.html')
+    return render_template('index2.html', n_text='Compleate', lp_text=request.form['landingPage'])
 
 @app.route('/domain', methods=['POST'])
 def domain():
     domain = request.form['domain'].lower().replace(' ', '_')
-    return render_template('index2.html')
+    cursor.execute('''UPDATE survey SET domain='{}' WHERE domain IS NULL;'''.format(domain))
+    connection.commit()
+    return render_template('index2.html', n_text='Compleate', lp_text='Compleate', d_text=request.form['domain'])
 
 @app.route('/adspend', methods=['POST'])
 def adspend():
-    adspend = int(request.form['adspend'].lower().replace(' ', '_'))
-    return render_template('index2.html')
+    adspend = int(request.form['adspend'])
+    try:
+        cursor.execute('''UPDATE survey SET adspend='{}' WHERE adspend IS NULL;'''.format(adspend))
+        connection.commit()
+        return render_template('index3.html')
+    except:
+        return 'Please use numbers only and no spaces, press the back arrow at the top of the page to return to the survey'
 
 @app.route('/hardcosts', methods=['POST'])
 def hardcosts():
-    hardcosts = int(request.form['hardcosts'].lower().replace(' ', '_'))
-    return render_template('index2.html')
+    hardcosts = int(request.form['hardcosts'])
+    try:
+        cursor.execute('''UPDATE survey SET hardcosts='{}' WHERE hardcosts IS NULL;'''.format(hardcosts))
+        connection.commit()
+        return render_template('index3.html', h_text=request.form['hardcosts'])
+    except:
+        return 'Please use numbers only and no spaces, press the back arrow at the top of the page to return to the survey'
 
-@app.route('/customer', methods=['GET'])
+@app.route('/customer', methods=['POST'])
 def customer():
-    customer = request.form.get('customer')
-    cursor.execute('''INSERT INTO test (testcol) VALUES ('{}');'''.format(customer))
+    inp = request.form['customer']
+    if inp == 'no':
+        customer = 0
+    if inp == 'yes':
+        customer = 1
+    cursor.execute('''UPDATE survey SET customer='{}' WHERE customer IS NULL;'''.format(customer))
     connection.commit()
-    return render_template('index2.html')
+    return render_template('index3.html', h_text='Compleate', c_text=request.form['customer'])
 
-@app.route('/model', methods=['GET'])
+@app.route('/model', methods=['POST'])
 def model():
-    model = request.form.get('model')
-    cursor.execute('''INSERT INTO test (testcol) VALUES ('{}');'''.format(model))
+    model = request.form['model']
+    cursor.execute('''UPDATE survey SET model='{}' WHERE model IS NULL;'''.format(model))
     connection.commit()
-    return render_template('index2.html')
+    return render_template('index3.html', h_text='Compleate', c_text='Compleate', m_text=request.form['model'])
 
-@app.route('/source', methods=['GET'])
+@app.route('/source', methods=['POST'])
 def source():
-    source = request.form.get('source')
-    cursor.execute('''INSERT INTO test (testcol) VALUES ('{}');'''.format(source))
+    source = request.form['source']
+    cursor.execute('''UPDATE survey SET source='{}' WHERE source IS NULL;'''.format(source))
     connection.commit()
-    return render_template('index2.html')
+    return render_template('index3.html', h_text='Compleate', c_text='Compleate', m_text='Compleate', s_text=request.form['source'])
 
 @app.route('/email', methods=['POST'])
 def email():
     email = request.form['email']
-    return render_template('index2.html')
+    cursor2.execute('''UPDATE leads SET email='{}' WHERE email IS NULL;'''.format(email))
+    connection2.commit()
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True, threaded=True)
