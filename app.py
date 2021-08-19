@@ -36,27 +36,37 @@ def domain():
     domain = request.form['domain'].lower().replace(' ', '_')
     cursor.execute('''UPDATE survey SET domain='{}' WHERE domain IS NULL;'''.format(domain))
     connection.commit()
-    return render_template('index2.html', n_text='Compleate', lp_text='Compleate', d_text=request.form['domain'])
+    return render_template('index3.html')
 
 @app.route('/adspend', methods=['POST'])
 def adspend():
-    adspend = int(request.form['adspend'])
+    adspend = int(request.form['adspend'].replace('$', '').replace(',', ''))
     try:
         cursor.execute('''UPDATE survey SET adspend='{}' WHERE adspend IS NULL;'''.format(adspend))
         connection.commit()
-        return render_template('index3.html')
+        return render_template('index3.html', as_text=adspend)
     except:
-        return 'Please use numbers only and no spaces, press the back arrow at the top of the page to return to the survey'
+        return 'Please use only numbers, commas, and dollar signs, press the back arrow at the top of the page to return to the survey'
 
 @app.route('/hardcosts', methods=['POST'])
 def hardcosts():
-    hardcosts = int(request.form['hardcosts'])
+    hardcosts = int(request.form['hardcosts'].replace('$', '').replace(',', ''))
     try:
         cursor.execute('''UPDATE survey SET hardcosts='{}' WHERE hardcosts IS NULL;'''.format(hardcosts))
         connection.commit()
-        return render_template('index3.html', h_text=request.form['hardcosts'])
+        return render_template('index3.html', as_text='Compleate', h_text=request.form['hardcosts'])
     except:
-        return 'Please use numbers only and no spaces, press the back arrow at the top of the page to return to the survey'
+        return 'Please use only numbers, commas, and dollar signs, press the back arrow at the top of the page to return to the survey'
+
+@app.route('/revenue', methods=['POST'])
+def revenue():
+    revenue = int(request.form['revenue'].replace('$', '').replace(',', ''))
+    try:
+        cursor.execute('''UPDATE survey SET revenue='{}' WHERE revenue IS NULL;'''.format(revenue))
+        connection.commit()
+        return render_template('index4.html')
+    except:
+        return 'Please use only numbers, commas, and dollar signs, press the back arrow at the top of the page to return to the survey'
 
 @app.route('/customer', methods=['POST'])
 def customer():
@@ -67,21 +77,21 @@ def customer():
         customer = 1
     cursor.execute('''UPDATE survey SET customer='{}' WHERE customer IS NULL;'''.format(customer))
     connection.commit()
-    return render_template('index3.html', h_text='Compleate', c_text=request.form['customer'])
+    return render_template('index4.html', c_text=request.form['customer'])
 
 @app.route('/model', methods=['POST'])
 def model():
     model = request.form['model']
     cursor.execute('''UPDATE survey SET model='{}' WHERE model IS NULL;'''.format(model))
     connection.commit()
-    return render_template('index3.html', h_text='Compleate', c_text='Compleate', m_text=request.form['model'])
+    return render_template('index4.html', c_text='Compleate', m_text=request.form['model'])
 
 @app.route('/source', methods=['POST'])
 def source():
     source = request.form['source']
     cursor.execute('''UPDATE survey SET source='{}' WHERE source IS NULL;'''.format(source))
     connection.commit()
-    return render_template('index3.html', h_text='Compleate', c_text='Compleate', m_text='Compleate', s_text=request.form['source'])
+    return render_template('index4.html', c_text='Compleate', m_text='Compleate', s_text=request.form['source'])
 
 @app.route('/email', methods=['POST'])
 def email():
