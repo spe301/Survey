@@ -11,7 +11,7 @@ cursor = connection.cursor()
 connection2 = connect(host='us-cdbr-east-04.cleardb.com', 
     user='b7a35a7346aea6', 
     password='a2aa8c36', 
-    database='fox_data_consulting')
+    database='heroku_38066fac900fae9')
 cursor2 = connection2.cursor()
 
 app = Flask(__name__)
