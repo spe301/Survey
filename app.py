@@ -8,11 +8,6 @@ connection = connect(host='us-cdbr-east-04.cleardb.com',
     password='a2aa8c36', 
     database='heroku_38066fac900fae9')
 cursor = connection.cursor()
-connection2 = connect(host='us-cdbr-east-04.cleardb.com', 
-    user='b7a35a7346aea6', 
-    password='a2aa8c36', 
-    database='heroku_38066fac900fae9')
-cursor2 = connection2.cursor(buffered=True)
 
 app = Flask(__name__)
 
@@ -26,8 +21,6 @@ def name():
     #may need try except loop for repeating values
     cursor.execute('''INSERT INTO survey (name) VALUES ('{}');'''.format(name)) #will also be written to connection2
     connection.commit()
-    cursor2.execute('''INSERT INTO leads (name) VALUES ('{}');'''.format(request.form['name'])) #will also be written to connection2
-    connection2.commit()
     return render_template('index2.html', n_text=request.form['name'])
 
 @app.route('/landingPage', methods=['POST'])
@@ -97,13 +90,6 @@ def source():
     source = request.form['source']
     cursor.execute('''UPDATE survey SET source='{}' WHERE source IS NULL;'''.format(source))
     connection.commit()
-    return render_template('index4.html', c_text='Compleate', m_text='Compleate', s_text=request.form['source'])
-
-@app.route('/email', methods=['POST'])
-def email():
-    email = request.form['email']
-    cursor2.execute('''UPDATE leads SET email='{}' WHERE email IS NULL;'''.format(email))
-    connection2.commit()
     return render_template('index.html')
 
 if __name__ == "__main__":
