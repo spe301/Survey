@@ -23,6 +23,12 @@ def name():
     connection.commit()
     return render_template('index2.html', n_text=request.form['name'])
 
+connection = connect(host='us-cdbr-east-04.cleardb.com', 
+    user='b7a35a7346aea6', 
+    password='a2aa8c36', 
+    database='heroku_38066fac900fae9')
+cursor = connection.cursor()
+
 @app.route('/landingPage', methods=['POST'])
 def landingPage():
     landingPage = request.form['landingPage']
